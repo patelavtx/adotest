@@ -26,7 +26,7 @@ terraform {
     }
   }
 */
-
+#  backend tfstate for pipeline setup
   backend "azurerm" {
     resource_group_name  = "atulrg-adotest"
     storage_account_name = "adotest"

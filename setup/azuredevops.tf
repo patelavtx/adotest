@@ -5,6 +5,7 @@ provider "azuredevops" {
   #personal_access_token = var.AZDO_PERSONAL_ACCESS_TOKEN 
 }
 
+# Create project.
 resource "azuredevops_project" "project" {
   name               = local.ado_project_name
   description        = local.ado_project_description
@@ -18,17 +19,18 @@ resource "azuredevops_project" "project" {
     "artifacts"    = "disabled"
     "boards"       = "disabled"
     "repositories" = "disabled"
+    "repositories" = "enabled"   #added 
     "pipelines"    = "enabled"
   }
 }
 
-# Check if ENV works 
+# Check if ENV works ; but pull repo to project 
 resource "azuredevops_serviceendpoint_github" "serviceendpoint_github" {
   project_id            = azuredevops_project.project.id
-  service_endpoint_name = "adotest"
+  service_endpoint_name = "GH App: Azure Pipeline"    
 
   auth_personal {
-    personal_access_token = var.ado_github_pat
+    personal_access_token = var.ado_github_pat   #  doc suggests variable is AZDO_GITHUB_SERVICE_CONNECTION_PAT
   }
 }
 

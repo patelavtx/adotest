@@ -4,6 +4,7 @@ variable "ado_org_service_url" {
   default = "https://dev.azure.com/apatel0999/"
 }
 
+# repo to link to pipeline
 variable "ado_github_repo" {
   type        = string
   description = "Name of the repository in the format <GitHub Org>/<RepoName>"
@@ -16,6 +17,7 @@ variable "ado_pipeline_yaml_path_1" {
   default     = "/vnet/azure-pipelines.yaml"
 }
 
+# GH - PAT providing access to repo
 variable "ado_github_pat" {
   type        = string
   description = "Personal authentication token for GitHub repo"
