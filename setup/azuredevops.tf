@@ -24,6 +24,20 @@ resource "azuredevops_project" "project" {
   }
 }
 
+# Service conn for azurerm
+resource "azuredevops_serviceendpoint_azurerm" "serviceendpoint_azurerm" {
+  project_id            = azuredevops_project.project.id
+  service_endpoint_name = "atulavtx-sst2"
+  description           = "Managed by Terraform"
+  credentials {
+    serviceprincipalid  = var.az_client_id
+    serviceprincipalkey = var.az_client_secret
+  }
+  azurerm_spn_tenantid      = var.az_tenant
+  azurerm_subscription_id   = var.az_subscription
+  azurerm_subscription_name = "CSP-AVTX-apatel"
+}
+
 # Check if ENV works ; but pull repo to project 
 resource "azuredevops_serviceendpoint_github" "serviceendpoint_github" {
   project_id            = azuredevops_project.project.id
