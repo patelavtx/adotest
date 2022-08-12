@@ -27,21 +27,21 @@ stages:
   # Init
     - task: TerraformTaskV3@3
       displayName: Initialize Terraform
-      env:
-        ARM_SAS_TOKEN: $(sas_token)
       inputs:
+        provider: 'azurerm'
         command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)/vnet'
-        commandOptions: '-backend-config=storage_account_name=$(storageaccount) -backend-config=container_name=$(container_name) -backend-config=key=$(key)'
-        backendType: 'selfConfigured'
-
+        backendServiceArm: 'atulavtx-sst2'
+        backendAzureRmResourceGroupName: 'attila52526'
+        backendAzureRmStorageAccountName: 'attila52526'
+        backendAzureRmContainerName: 'terraform-state'
+        backendAzureRmKey: 'ado.terraform.tfstate'
   # Validate
     - task: TerraformTaskV3@3
       displayName: Validate Config
       inputs:
         command: 'validate'
         workingDirectory: '$(System.DefaultWorkingDirectory)/vnet'
-    
 - stage: Plan
   displayName: Plan
   jobs:
@@ -57,26 +57,23 @@ stages:
   # Init
     - task: TerraformTaskV3@3
       displayName: Initialize Terraform
-      env:
-        ARM_SAS_TOKEN: $(sas_token)
       inputs:
+        provider: 'azurerm'
         command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)/vnet'
-        commandOptions: '-backend-config=storage_account_name=$(storageaccount) -backend-config=container_name=$(container_name) -backend-config=key=$(key)'
-        backendType: 'selfConfigured'
+        backendServiceArm: 'atulavtx-sst2'
+        backendAzureRmResourceGroupName: 'attila52526'
+        backendAzureRmStorageAccountName: 'attila52526'
+        backendAzureRmContainerName: 'terraform-state'
+        backendAzureRmKey: 'ado.terraform.tfstate'
 
   # Plan
     - task: TerraformTaskV3@3
       displayName: Plan Terraform Deployment
-      env:
-        ARM_SAS_TOKEN: $(sas_token)
-        ARM_CLIENT_ID: $(az_client_id)
-        ARM_CLIENT_SECRET: $(az_client_secret)
-        ARM_SUBSCRIPTION_ID: $(az_subscription)
-        ARM_TENANT_ID: $(az_tenant)
       inputs:
         command: 'plan'
         workingDirectory: '$(System.DefaultWorkingDirectory)/vnet'
+        environmentServiceNameAzureRM: 'atulavtx-sst2'
 
 # Approve
 - stage: Approve
@@ -107,24 +104,21 @@ stages:
   # Init
     - task: TerraformTaskV3@3
       displayName: Initialize Terraform
-      env:
-        ARM_SAS_TOKEN: $(sas_token)
       inputs:
+        provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/2021-05-11-ADO/vnet'
-        commandOptions: '-backend-config=storage_account_name=$(storageaccount) -backend-config=container_name=$(container_name) -backend-config=key=$(key)'
-        backendType: 'selfConfigured'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/vnet'
+        backendServiceArm: 'atulavtx-sst2'
+        backendAzureRmResourceGroupName: 'attila52526'
+        backendAzureRmStorageAccountName: 'attila52526'
+        backendAzureRmContainerName: 'terraform-state'
+        backendAzureRmKey: 'ado.terraform.tfstate'
 
   # Apply
     - task: TerraformTaskV3@3
       displayName: Apply Terraform Deployment
-      env:
-        ARM_SAS_TOKEN: $(sas_token)
-        ARM_CLIENT_ID: $(az_client_id)
-        ARM_CLIENT_SECRET: $(az_client_secret)
-        ARM_SUBSCRIPTION_ID: $(az_subscription)
-        ARM_TENANT_ID: $(az_tenant)
       inputs:
         command: 'apply'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/2021-05-11-ADO/vnet'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/vnet'
         commandOptions: '-auto-approve'
+        environmentServiceNameAzureRM: 'atulavtx-sst2'
