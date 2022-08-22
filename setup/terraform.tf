@@ -17,7 +17,7 @@ terraform {
     }
 
   }
-  /*
+  /*   if TFC used for backend
   backend "remote" {
     organization = "attilapipeline"
 

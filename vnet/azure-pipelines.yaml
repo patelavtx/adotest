@@ -9,7 +9,7 @@ trigger:
     - main
   paths:
     include:
-    - ./vnet
+    - adotest/vnet
 
 stages:
 - stage: Validate
@@ -30,7 +30,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/vnet'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/adotest/vnet'
         backendServiceArm: 'atulavtx-sst2'
         backendAzureRmResourceGroupName: 'attila52526'
         backendAzureRmStorageAccountName: 'attila52526'
@@ -41,7 +41,7 @@ stages:
       displayName: Validate Config
       inputs:
         command: 'validate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/vnet'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/adotest/vnet'
 - stage: Plan
   displayName: Plan
   jobs:
@@ -60,7 +60,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/vnet'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/adotest/vnet'
         backendServiceArm: 'atulavtx-sst2'
         backendAzureRmResourceGroupName: 'attila52526'
         backendAzureRmStorageAccountName: 'attila52526'
@@ -72,7 +72,7 @@ stages:
       displayName: Plan Terraform Deployment
       inputs:
         command: 'plan'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/vnet'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/adotest/vnet'
         environmentServiceNameAzureRM: 'atulavtx-sst2'
 
 # Approve
@@ -107,7 +107,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/vnet'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/adotest/vnet'
         backendServiceArm: 'atulavtx-sst2'
         backendAzureRmResourceGroupName: 'attila52526'
         backendAzureRmStorageAccountName: 'attila52526'
@@ -119,6 +119,6 @@ stages:
       displayName: Apply Terraform Deployment
       inputs:
         command: 'apply'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/vnet'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/adotest/vnet'
         commandOptions: '-auto-approve'
         environmentServiceNameAzureRM: 'atulavtx-sst2'

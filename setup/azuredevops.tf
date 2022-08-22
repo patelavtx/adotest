@@ -19,12 +19,12 @@ resource "azuredevops_project" "project" {
     "artifacts"    = "disabled"
     "boards"       = "disabled"
     "repositories" = "disabled"
-    "repositories" = "enabled"   #added 
+    "repositories" = "enabled"   #added , but not needed as the GH repo is used and not AzDevOPs
     "pipelines"    = "enabled"
   }
 }
 
-# Service conn for azurerm
+# Service conn for azurerm 
 resource "azuredevops_serviceendpoint_azurerm" "serviceendpoint_azurerm" {
   project_id            = azuredevops_project.project.id
   service_endpoint_name = "atulavtx-sst2"
@@ -38,7 +38,7 @@ resource "azuredevops_serviceendpoint_azurerm" "serviceendpoint_azurerm" {
   azurerm_subscription_name = "CSP-AVTX-apatel"
 }
 
-# Check if ENV works ; but pull repo to project 
+# GH conn - Check if ENV works ; but pull repo to project using GH pat
 resource "azuredevops_serviceendpoint_github" "serviceendpoint_github" {
   project_id            = azuredevops_project.project.id
   service_endpoint_name = "GH App: Azure Pipeline"    
@@ -48,14 +48,14 @@ resource "azuredevops_serviceendpoint_github" "serviceendpoint_github" {
   }
 }
 
-# Auth projects to use GH
+# Auth projects to use GH conn
 resource "azuredevops_resource_authorization" "auth" {
   project_id  = azuredevops_project.project.id
   resource_id = azuredevops_serviceendpoint_github.serviceendpoint_github.id
   authorized  = true
 }
 
-# VG for pipeline
+# VG for pipeline, variables to use
 resource "azuredevops_variable_group" "variablegroup" {
   project_id   = azuredevops_project.project.id
   name         = "adotest-vg"
@@ -108,7 +108,7 @@ resource "azuredevops_variable_group" "variablegroup" {
   }
 }
 
-# Create pipeline
+# Create pipeline 
 resource "azuredevops_build_definition" "pipeline_1" {
 
   depends_on = [azuredevops_resource_authorization.auth]
