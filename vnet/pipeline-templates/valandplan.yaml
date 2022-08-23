@@ -27,7 +27,7 @@ stages:
   jobs:
     - deployment: validate_and_plan
       continueOnError: false
-      #environment: 'spoke16'
+      environment: 'adotest'
       strategy:
        runOnce:
          deploy:

@@ -3,7 +3,7 @@ stages:
     jobs:
       - deployment: deploy_terraform
         continueOnError: false
-        environment: 'spoke16'
+        environment: 'adotest'
         strategy:
           runOnce:
             deploy:
