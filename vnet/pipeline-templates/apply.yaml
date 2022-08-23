@@ -1,0 +1,34 @@
+stages:
+  - stage: deploy
+    jobs:
+      - deployment: deploy_terraform
+        continueOnError: false
+        environment: 'spoke16'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                - task: TerraformInstaller@0
+                  displayName: 'install'
+                  inputs:
+                    terraformVersion: '1.1.0'
+                - task: TerraformTaskV3@3
+                  displayName: 'init'
+                  inputs:
+                    provider: 'azurerm'
+                    command: 'init'
+                    backendServiceArm: 'atulavtx-sst2'
+                    backendAzureRmResourceGroupName: 'attila52526'
+                    backendAzureRmStorageAccountName: 'attila52526'
+                    backendAzureRmContainerName: 'terraform-state'
+                    backendAzureRmKey: 'ado.terraform.tfstate'
+                - task: TerraformTaskV2@2
+                  displayName: 'apply'
+                  inputs:
+                    provider: 'azurerm'
+                    command: 'apply'
+                    #commandOptions: '-var "ctrl_password=$(TF_VAR_ctrlpassword)" -var "controller_ip=$(TF_VAR_controller_ip)"'
+                    #commandOptions: '-var "ctrl_password=$(ctrl_password)" -var "controller_ip=$(controller_ip)"'
+
+                    environmentServiceNameAzureRM: 'atulavtx-sst2'

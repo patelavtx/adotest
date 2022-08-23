@@ -18,7 +18,7 @@ resource "azuredevops_project" "project" {
     "testplans"    = "disabled"
     "artifacts"    = "disabled"
     "boards"       = "disabled"
-    "repositories" = "disabled"
+    #"repositories" = "disabled"
     "repositories" = "enabled"   #added , but not needed as the GH repo is used and not AzDevOPs
     "pipelines"    = "enabled"
   }
