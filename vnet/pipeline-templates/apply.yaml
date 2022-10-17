@@ -18,6 +18,7 @@ stages:
                   inputs:
                     provider: 'azurerm'
                     command: 'init'
+                    workingDirectory: '$(System.DefaultWorkingDirectory)\vnet'
                     backendServiceArm: 'atulavtx-sst2'
                     backendAzureRmResourceGroupName: 'attila48695'
                     backendAzureRmStorageAccountName: 'attila48695'
@@ -28,6 +29,7 @@ stages:
                   inputs:
                     provider: 'azurerm'
                     command: 'apply'
+                    workingDirectory: '$(System.DefaultWorkingDirectory)\vnet'
                     #commandOptions: '-var "ctrl_password=$(TF_VAR_ctrlpassword)" -var "controller_ip=$(TF_VAR_controller_ip)"'
                     #commandOptions: '-var "ctrl_password=$(ctrl_password)" -var "controller_ip=$(controller_ip)"'
 
