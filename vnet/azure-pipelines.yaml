@@ -8,6 +8,8 @@ variables:
 - group: adotest-vg
 
 stages:
+#- template: pipeline-templates/addnsg.yaml
 - template: pipeline-templates/valandplan.yaml
 - template: pipeline-templates/approval.yaml
 - template: pipeline-templates/apply.yaml
+#- template: pipeline-templates/delnsg.yaml

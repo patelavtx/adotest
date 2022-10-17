@@ -1,0 +1,17 @@
+stages:
+- stage: add_rule
+  jobs:
+    - deployment: add_sg_rule
+      continueOnError: false
+      environment: 'adotest'
+      strategy:
+        runOnce:
+          deploy:
+           steps:
+             - task: AzureCLI@2
+               displayName: 'set nsg'
+               inputs:
+                  azureSubscription: 'atulavtx-sst2'
+                  scriptType: 'bash'
+                  scriptLocation: 'inlineScript'
+                  inlineScript: 'az network nsg rule create --name adotest --nsg-name $(controller-nsg) --priority 110 --resource-group $(controller-rg) --access Allow --protocol ''*'' --source-address-prefixes 86.20.255.82 --destination-port-ranges 80 443'

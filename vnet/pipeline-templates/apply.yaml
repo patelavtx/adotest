@@ -19,10 +19,10 @@ stages:
                     provider: 'azurerm'
                     command: 'init'
                     backendServiceArm: 'atulavtx-sst2'
-                    backendAzureRmResourceGroupName: 'attila52526'
-                    backendAzureRmStorageAccountName: 'attila52526'
+                    backendAzureRmResourceGroupName: 'attila48695'
+                    backendAzureRmStorageAccountName: 'attila48695'
                     backendAzureRmContainerName: 'terraform-state'
-                    backendAzureRmKey: 'ado.terraform.tfstate'
+                    backendAzureRmKey: 'adoterraform.tfstate'
                 - task: TerraformTaskV2@2
                   displayName: 'apply'
                   inputs:

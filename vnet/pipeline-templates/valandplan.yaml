@@ -43,10 +43,10 @@ stages:
                 provider: 'azurerm'
                 command: 'init'
                 backendServiceArm: 'atulavtx-sst2'
-                backendAzureRmResourceGroupName: 'attila52526'
-                backendAzureRmStorageAccountName: 'attila52526'
+                backendAzureRmResourceGroupName: 'attila48695'
+                backendAzureRmStorageAccountName: 'attila48695'
                 backendAzureRmContainerName: 'terraform-state'
-                backendAzureRmKey: 'ado.terraform.tfstate'
+                backendAzureRmKey: 'adoterraform.tfstate'
             - task: TerraformTaskV3@3
               displayName: 'plan'
               inputs:
@@ -54,5 +54,5 @@ stages:
                 command: 'plan'
                 #commandOptions: '-input=false -var "ctrl_password=$(TF_VAR_ctrl_password)" -var "controller_ip=$(TF_VAR_controller_ip)"'
                 #commandOptions: '-var "ctrl_password=$(ctrl_password)" -var "controller_ip=$(controller_ip)"'
-
+                
                 environmentServiceNameAzureRM: 'atulavtx-sst2'
