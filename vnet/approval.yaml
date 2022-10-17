@@ -1,0 +1,5 @@
+stages:
+  - stage: manual_approval
+    jobs:
+      - deployment: 'DeployToProduction'
+        environment: 'adotest'

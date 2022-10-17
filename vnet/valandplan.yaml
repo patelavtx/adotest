@@ -1,0 +1,61 @@
+stages:
+- stage: validate
+  jobs:
+  - job: validate
+    continueOnError: false
+    steps:
+    - task: TerraformInstaller@0
+      displayName: 'install'
+      inputs:
+        terraformVersion: '1.1.0'
+    - task: TerraformTaskV3@3
+      displayName: init
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)\vnet'
+        backendServiceArm: 'atulavtx-sst2'
+        backendAzureRmResourceGroupName: 'attila932'
+        backendAzureRmStorageAccountName: 'attila932'
+        backendAzureRmContainerName: 'terraform-state'
+        backendAzureRmKey: 'ado.terraform.tfstate'
+    - task: TerraformTaskV3@3
+      displayName: 'validate'
+      inputs:
+        provider: 'azurerm'
+        command: 'validate'
+- stage: plan
+  jobs:
+    - deployment: validate_and_plan
+      continueOnError: false
+      environment: 'adotest'
+      strategy:
+       runOnce:
+         deploy:
+          steps:
+            - checkout: self
+            - task: TerraformInstaller@0
+              displayName: 'install'
+              inputs:
+                terraformVersion: '1.1.0'
+            - task: TerraformTaskV3@3
+              displayName: 'init'
+              inputs:
+                provider: 'azurerm'
+                command: 'init'
+                workingDirectory: '$(System.DefaultWorkingDirectory)\vnet'
+                backendServiceArm: 'atulavtx-sst2'
+                backendAzureRmResourceGroupName: 'attila932'
+                backendAzureRmStorageAccountName: 'attila932'
+                backendAzureRmContainerName: 'terraform-state'
+                backendAzureRmKey: 'adoterraform.tfstate'
+            - task: TerraformTaskV3@3
+              displayName: 'plan'
+              inputs:
+                provider: 'azurerm'
+                command: 'plan'
+                workingDirectory: '$(System.DefaultWorkingDirectory)\vnet'
+                #commandOptions: '-input=false -var "ctrl_password=$(TF_VAR_ctrl_password)" -var "controller_ip=$(TF_VAR_controller_ip)"'
+                #commandOptions: '-var "ctrl_password=$(ctrl_password)" -var "controller_ip=$(controller_ip)"'
+                
+                environmentServiceNameAzureRM: 'atulavtx-sst2'

@@ -1,0 +1,17 @@
+stages:
+- stage: del_rule
+  jobs:
+    - deployment: del_nsg_rule
+      continueOnError: false
+      environment: 'adotest'
+      strategy:
+        runOnce:
+          deploy:
+           steps:
+             - task: AzureCLI@2
+               displayName: 'del nsg'
+               inputs:
+                  azureSubscription: 'atulavtx-sst2'
+                  scriptType: 'bash'
+                  scriptLocation: 'inlineScript'
+                  inlineScript: 'az network nsg rule delete --name adotest --nsg-name $(controller-nsg)  --resource-group $(controller-rg)'

@@ -9,7 +9,7 @@ variables:
 
 stages:
 #- template: pipeline-templates/addnsg.yaml
-- template: pipeline-templates/valandplan.yaml
-- template: pipeline-templates/approval.yaml
-- template: pipeline-templates/apply.yaml
+- template: ./valandplan.yaml
+- template: ./approval.yaml
+- template: ./apply.yaml
 #- template: pipeline-templates/delnsg.yaml
