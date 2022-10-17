@@ -1,7 +1,7 @@
 terraform {
   backend "azurerm" {
-    resource_group_name  = "attila52526"
-    storage_account_name = "attila52526"
+    resource_group_name  = "attila932"
+    storage_account_name = "attila932"
     container_name       = "terraform-state"
     key                  = "ado.terraform.tfstate"
   }

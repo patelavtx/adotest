@@ -15,8 +15,8 @@ stages:
         command: 'init'
         workingDirectory: '$(System.DefaultWorkingDirectory)\vnet'
         backendServiceArm: 'atulavtx-sst2'
-        backendAzureRmResourceGroupName: 'attila52526'
-        backendAzureRmStorageAccountName: 'attila52526'
+        backendAzureRmResourceGroupName: 'attila932'
+        backendAzureRmStorageAccountName: 'attila932'
         backendAzureRmContainerName: 'terraform-state'
         backendAzureRmKey: 'ado.terraform.tfstate'
     - task: TerraformTaskV3@3
@@ -45,8 +45,8 @@ stages:
                 command: 'init'
                 workingDirectory: '$(System.DefaultWorkingDirectory)\vnet'
                 backendServiceArm: 'atulavtx-sst2'
-                backendAzureRmResourceGroupName: 'attila48695'
-                backendAzureRmStorageAccountName: 'attila48695'
+                backendAzureRmResourceGroupName: 'attila932'
+                backendAzureRmStorageAccountName: 'attila932'
                 backendAzureRmContainerName: 'terraform-state'
                 backendAzureRmKey: 'adoterraform.tfstate'
             - task: TerraformTaskV3@3

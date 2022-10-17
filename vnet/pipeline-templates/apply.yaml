@@ -20,8 +20,8 @@ stages:
                     command: 'init'
                     workingDirectory: '$(System.DefaultWorkingDirectory)\vnet'
                     backendServiceArm: 'atulavtx-sst2'
-                    backendAzureRmResourceGroupName: 'attila48695'
-                    backendAzureRmStorageAccountName: 'attila48695'
+                    backendAzureRmResourceGroupName: 'attila932'
+                    backendAzureRmStorageAccountName: 'attila932'
                     backendAzureRmContainerName: 'terraform-state'
                     backendAzureRmKey: 'adoterraform.tfstate'
                 - task: TerraformTaskV2@2
